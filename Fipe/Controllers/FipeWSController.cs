@@ -1,5 +1,6 @@
 ﻿using FipeApi;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Fipe.Controllers
 {
@@ -15,16 +16,16 @@ namespace Fipe.Controllers
         [HttpGet("{fipeCode}")]
         public IActionResult Get([FromRoute] string fipeCode)
         {
-            var fipeWS = new FipeWS();
-            var result = fipeWS.GetFipeInfo(fipeCode);
-            return Ok(result.VehiclePrice);
-            //try
-            //{
-            //}
-            //catch
-            //{
-            //    return BadRequest();
-            //}
+            try
+            {
+                var fipeWS = new FipeWS();
+                var result = fipeWS.GetFipeInfo(fipeCode);
+                return Ok(result.VehiclePrice);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
     }
 }
