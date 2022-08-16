@@ -1,4 +1,5 @@
-﻿using FipeApi;
+﻿using Fipe.Repositories;
+using FipeApi;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -13,8 +14,8 @@ namespace Fipe.Controllers
         /// </summary>
         /// <param name="fipeCode">Car FIPE Code</param>
         /// <returns>A car value</returns>
-        [HttpGet("{fipeCode}")]
-        public IActionResult Get([FromRoute] string fipeCode)
+        [HttpGet("code/{fipeCode}")]
+        public IActionResult GetFipeCode([FromRoute] string fipeCode)
         {
             try
             {
@@ -22,9 +23,29 @@ namespace Fipe.Controllers
                 var result = fipeWS.GetFipeInfo(fipeCode);
                 return Ok(result.VehiclePrice);
             }
-            catch (Exception e)
+            catch
             {
-                return BadRequest(e);
+                return BadRequest();
+            }
+        }
+
+        /// <summary>
+        /// Return the car code price informed
+        /// </summary>
+        /// <param name="id">Car Id</param>
+        /// <returns>A car value</returns>
+        [HttpGet("{id}")]
+        public IActionResult GetId([FromRoute] int id)
+        {
+            try
+            {
+                var price = new VehiclePriceMocked().SearchValue(id);
+
+                return Ok(price);
+            }
+            catch
+            {
+                return BadRequest();
             }
         }
     }
