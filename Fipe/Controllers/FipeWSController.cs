@@ -15,16 +15,16 @@ namespace Fipe.Controllers
         [HttpGet("{fipeCode}")]
         public IActionResult Get([FromRoute] string fipeCode)
         {
-            try
-            {
-                var fipeWS = new FipeWS();
-                var result = fipeWS.GetFipeInfo(fipeCode);
-                return Ok(result.VehiclePrice);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+            var fipeWS = new FipeWS();
+            var result = fipeWS.GetFipeInfo(fipeCode);
+            return Ok(result.VehiclePrice);
+            //try
+            //{
+            //}
+            //catch
+            //{
+            //    return BadRequest();
+            //}
         }
     }
 }
