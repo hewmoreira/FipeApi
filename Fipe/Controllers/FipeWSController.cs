@@ -18,13 +18,9 @@ namespace Fipe.Controllers
         {
             try
             {
-                Console.WriteLine("0");
                 var fipeWS = new FipeWS();
-                Console.WriteLine("1");
                 var result = fipeWS.GetFipeInfo(fipeCode);
-                Console.WriteLine("2");
                 return Ok(result.VehiclePrice);
-                Console.WriteLine("3");
             }
             catch (Exception e)
             {
